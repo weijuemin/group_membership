@@ -1,0 +1,18 @@
+<h1><%= @group.name %> 
+<% if Membership.where(user: current_user, group: @group).count > 0 %>
+<%= button_to "Leave Group", "/groups/#{@group.id}", method: :delete, class: "btn btn-danger btn-sm action" %>
+<% else %>
+<%= button_to "Join Group", "/groups/#{@group.id}", method: :patch, class: "btn btn-info btn-sm action" %>
+<% end -%>
+</h1>
+<p><%= @group.description %></p>
+<h4>Created by: <span class="creator"><%= @creator.first_name %> <%= @creator.last_name %></span></h4>
+<h4>Members(<%= Membership.where(group: @group).count %>): </h4>
+<ul class="members">
+  <% if @creatorInG %>
+    <li><%= @creator.first_name %> <%= @creator.last_name %></li>    
+  <% end -%>
+  <% @others.each do |m| %>
+  <li><%= m.user.first_name %> <%= m.user.last_name %></li>
+  <% end -%>
+</ul>
