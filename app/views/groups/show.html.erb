@@ -1,6 +1,6 @@
 <h1><%= @group.name %> 
 <% if Membership.where(user: current_user, group: @group).count > 0 %>
-<%= button_to "Leave Group", "/groups/#{@group.id}", method: :delete, class: "btn btn-danger btn-sm action" %>
+<%= button_to "Leave Group", "/groups/#{@group.id}", method: :delete, class: "btn btn-warning btn-sm action" %>
 <% else %>
 <%= button_to "Join Group", "/groups/#{@group.id}", method: :patch, class: "btn btn-info btn-sm action" %>
 <% end -%>
@@ -8,7 +8,7 @@
 <p><%= @group.description %></p>
 <h4>Created by: <span class="creator"><%= @creator.first_name %> <%= @creator.last_name %></span> 
   <% if @creator == current_user %>
-  <%= button_to "Delete group", "/groups/#{@group.id}/delete", method: :delete %>
+  <%= button_to "Delete group", "/groups/#{@group.id}/delete", method: :delete, class: "btn btn-danger" %>
   <% end -%>
 </h4>
 <h4>Members(<%= Membership.where(group: @group).count %>): </h4>
