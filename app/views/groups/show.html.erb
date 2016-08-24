@@ -6,7 +6,11 @@
 <% end -%>
 </h1>
 <p><%= @group.description %></p>
-<h4>Created by: <span class="creator"><%= @creator.first_name %> <%= @creator.last_name %></span></h4>
+<h4>Created by: <span class="creator"><%= @creator.first_name %> <%= @creator.last_name %></span> 
+  <% if @creator == current_user %>
+  <%= button_to "Delete group", "/groups/#{@group.id}/delete", method: :delete %>
+  <% end -%>
+</h4>
 <h4>Members(<%= Membership.where(group: @group).count %>): </h4>
 <ul class="members">
   <% if @creatorInG %>

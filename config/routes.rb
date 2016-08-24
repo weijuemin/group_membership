@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   patch "/groups/:g_id" => "groups#join"
   delete "/groups/:g_id" => "groups#leave"
+  delete "/groups/:g_id/delete" => "groups#destroy"
 end

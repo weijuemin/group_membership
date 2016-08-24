@@ -45,4 +45,12 @@ class GroupsController < ApplicationController
     end
     redirect_to "/groups"
   end
+
+  def destroy
+    g = Group.find(params[:g_id])
+    m = Membership.where(group: g).all
+    m.delete
+    g.delete
+    redirect_to "/groups", :notice => "Group deleted."
+  end
 end
