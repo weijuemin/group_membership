@@ -1,18 +1,15 @@
 class GroupsController < ApplicationController
+  before_action :require_login
   def index
-    if logged_in
-      @user = current_user
-      @myg = []
-      @otherg = []
-      Group.all.each do |g|
-        if Membership.where(group: g, user: @user).count == 0
-          @otherg << g
-        else
-          @myg << g
-        end
+    @user = current_user
+    @myg = []
+    @otherg = []
+    Group.all.each do |g|
+      if Membership.where(group: g, user: @user).count == 0
+        @otherg << g
+      else
+        @myg << g
       end
-    else
-      redirect_to "/"
     end
   end
 
